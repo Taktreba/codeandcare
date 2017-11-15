@@ -16,4 +16,4 @@
 //});
 
 
-Route::get('/', 'SaveCoinValueController@SaveCoinValue');
+Route::get('/', 'SaveCoinValueController@index');

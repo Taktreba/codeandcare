@@ -5,6 +5,8 @@ namespace App\Console\Commands;
 use Illuminate\Console\Command;
 use App\Coindesk;
 use App\Blockchain;
+use Illuminate\Support\Facades\Log;
+
 
 class PullCoinValue extends Command
 {
@@ -39,6 +41,7 @@ class PullCoinValue extends Command
      */
     public function handle()
     {
+        $start = microtime(true);
 
         $coindesk = json_decode(file_get_contents("https://api.coindesk.com/v1/bpi/currentprice.json"), true);
         $blockchain = json_decode(file_get_contents("https://blockchain.info/ticker"), true);
@@ -86,6 +89,8 @@ class PullCoinValue extends Command
 
         $blockchainModel->save();
 
+
+        Log::info('Time start command: ' . date('Y-m-d H:i:s') . ' Provider \'coindesk\' and \'blockchain\', execution time of the script: ' . (microtime(true) - $start) . ' second.');
 
         echo 'You Coin values save in DB \'code&care\'';
     }
