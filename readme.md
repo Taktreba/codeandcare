@@ -22,4 +22,4 @@
 В App/Http/Controllers/CoinValueController.php - метод ShowTable достаем данные из БД и возвращаем view 'welcome' с данными<br>
 В resources/views/welcome.blade.php - вьюха с таблицами<br>
 
-Тайм код, и порядок выполнения работы можно отследить по коммитам на GITHUB'e
+Тайм код, и порядок выполнения работы можно отследить по коммитам на GITHUB'e 
