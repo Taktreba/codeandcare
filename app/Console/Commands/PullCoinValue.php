@@ -41,12 +41,12 @@ class PullCoinValue extends Command
      */
     public function handle()
     {
-        $start = microtime(true);
+        $start = microtime(true); // запустить счетчик отработки скрипта
 
-        $coindesk = json_decode(file_get_contents("https://api.coindesk.com/v1/bpi/currentprice.json"), true);
+        $coindesk = json_decode(file_get_contents("https://api.coindesk.com/v1/bpi/currentprice.json"), true); // получаем массивы данных с сайтов
         $blockchain = json_decode(file_get_contents("https://blockchain.info/ticker"), true);
 
-        function tofloat($num)
+        function tofloat($num) // функция бля того что бы сделать нормальныое флоат число 7,125.23 = 7125.23 я сделал свою функцию, но потом нагуглил эту и вставил себе в код
         {
             $dotPos = strrpos($num, '.');
             $commaPos = strrpos($num, ',');
@@ -63,7 +63,7 @@ class PullCoinValue extends Command
             );
         }
 
-        $coindeskUSARait = tofloat(substr($coindesk['bpi']['USD']['rate'], 0, 8));
+        $coindeskUSARait = tofloat(substr($coindesk['bpi']['USD']['rate'], 0, 8));  // достаем стоимость одного койна их coindesk'a
         $coindeskGBPRait = tofloat(substr($coindesk['bpi']['GBP']['rate'], 0, 8));
         $coindeskEURRait = tofloat(substr($coindesk['bpi']['EUR']['rate'], 0, 8));
 
@@ -74,10 +74,10 @@ class PullCoinValue extends Command
         $coindesmMODEL->GBP = $coindeskGBPRait;
         $coindesmMODEL->EUR = $coindeskEURRait;
 
-        $coindesmMODEL->save();
+        $coindesmMODEL->save(); // сохраняем в БД
 
 
-        $blockchainUSD = $blockchain['USD']['15m'];
+        $blockchainUSD = $blockchain['USD']['15m']; // достаем стоимость одного койна их blockchain'a
         $blockchainGBP = $blockchain['GBP']['15m'];
         $blockchainEUR = $blockchain['EUR']['15m'];
 
@@ -87,11 +87,10 @@ class PullCoinValue extends Command
         $blockchainModel->GBP = $blockchainGBP;
         $blockchainModel->EUR = $blockchainEUR;
 
-        $blockchainModel->save();
+        $blockchainModel->save(); // сохраняем в БД
 
 
-        Log::info('Time start command: ' . date('Y-m-d H:i:s') . ' Provider \'coindesk\' and \'blockchain\', execution time of the script: ' . (microtime(true) - $start) . ' second.');
-
-        echo 'You Coin values save in DB \'code&care\'';
+        Log::info('Time start command: ' . date('Y-m-d H:i:s') . ' Provider \'coindesk\' and \'blockchain\', execution time of the script: ' . (microtime(true) - $start) . ' second.');  // сохраняем информацию в лог
+        echo 'You Coin values save in DB \'code&care\''; // выводим сообщение в консоль об успешной операции, и идем пить чаЙОк
     }
 }
