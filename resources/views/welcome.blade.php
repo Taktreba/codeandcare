@@ -124,6 +124,10 @@
             text-align: center;
             margin-top: 20px;
         }
+
+        .star {
+            /*font-size: 20px;*/
+        }
     </style>
 </head>
 <body>
@@ -149,16 +153,17 @@
                         <option value="25">25</option>
                     </select>
                 </form>
+
             </div>
             <div class="col-md-6">
                 <h3>blockchain</h3>
                 <table id="myTable1" class="tablesorter">
                     <thead>
                     <tr>
-                        <th>Date</th>
-                        <th>USD</th>
-                        <th>GBP</th>
-                        <th>EUR</th>
+                        <th>Date*</th>
+                        <th>USD*</th>
+                        <th>GBP*</th>
+                        <th>EUR*</th>
                     </tr>
                     </thead>
                     @foreach($blockchain as $value)
@@ -177,10 +182,10 @@
                 <table id="myTable2" class="tablesorter">
                     <thead>
                     <tr>
-                        <th>Date</th>
-                        <th>USD</th>
-                        <th>GBP</th>
-                        <th>EUR</th>
+                        <th>Date*</th>
+                        <th>USD*</th>
+                        <th>GBP*</th>
+                        <th>EUR*</th>
                     </tr>
                     </thead>
                     @foreach($coindesk as $value)
@@ -194,10 +199,10 @@
                 </table>
 
             </div>
-
         </div>
-
-
+        <div style="margin-top: 20px">
+            Use '<strong>star fields - *</strong>' to sort table
+        </div>
     </div>
 </div>
 </body>
