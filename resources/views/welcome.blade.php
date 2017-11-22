@@ -11,6 +11,10 @@
     <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <script type="text/javascript" src="js/jquery-latest.js"></script>
+    <script type="text/javascript" src="js/jquery.tablesorter.js"></script>
+    <script type="text/javascript" src="js/jquery.tablesorter.pager.js"></script>
+    <script type="text/javascript" src="js/userJs.js"></script>
 
     <!-- Styles -->
     <style>
@@ -116,7 +120,10 @@
             border-right: none;
         }
 
-
+        #pager {
+            text-align: center;
+            margin-top: 20px;
+        }
     </style>
 </head>
 <body>
@@ -128,15 +135,32 @@
         <h2>Last 3 coin value</h2>
 
         <div class="row">
+            <div id="pager" class="pager">
+                <form>
+                    <img width="10" src="img/no-translate-detected_318-73640.jpg" class="first">
+                    <img width="10" src="img/no-translate-detected_318-85985.jpg" class="prev">
+                    <input type="text" class="pagedisplay">
+                    <img width="10" src="img/no-translate-detected_318-85964.jpg" class="next">
+                    <img width="10" src="img/no-translate-detected_318-72463.jpg" class="last">
+                    <select class="pagesize">
+                        <option value="5">5</option>
+                        <option value="10">10</option>
+                        <option value="20">20</option>
+                        <option value="25">25</option>
+                    </select>
+                </form>
+            </div>
             <div class="col-md-6">
                 <h3>blockchain</h3>
-                <table>
+                <table id="myTable1" class="tablesorter">
+                    <thead>
                     <tr>
                         <th>Date</th>
                         <th>USD</th>
                         <th>GBP</th>
                         <th>EUR</th>
                     </tr>
+                    </thead>
                     @foreach($blockchain as $value)
                         <tr>
                             <td>{{ $value->created_at }}</td>
@@ -150,13 +174,15 @@
             <div class="col-md-6">
 
                 <h3>coindesk</h3>
-                <table>
+                <table id="myTable2" class="tablesorter">
+                    <thead>
                     <tr>
                         <th>Date</th>
                         <th>USD</th>
                         <th>GBP</th>
                         <th>EUR</th>
                     </tr>
+                    </thead>
                     @foreach($coindesk as $value)
                         <tr>
                             <td>{{ $value->created_at }}</td>
@@ -168,6 +194,7 @@
                 </table>
 
             </div>
+
         </div>
 
 
@@ -175,3 +202,4 @@
 </div>
 </body>
 </html>
+

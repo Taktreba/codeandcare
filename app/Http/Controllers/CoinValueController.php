@@ -18,8 +18,8 @@ class CoinValueController extends Controller
     public function ShowTable()
     {
 
-        $blockchain = DB::table('blockchains')->latest('created_at')->limit(3)->get(); // берем по три последние записи из таблиц
-        $coindesk = DB::table('coindesks')->latest('created_at')->limit(3)->get();
+        $blockchain = DB::table('blockchains')->latest('created_at')->get(); // берем по три последние записи из таблиц
+        $coindesk = DB::table('coindesks')->latest('created_at')->get();
 
         return view('welcome', ['blockchain' => $blockchain, 'coindesk' => $coindesk]);
 
